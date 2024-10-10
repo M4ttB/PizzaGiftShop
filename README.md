@@ -7,4 +7,7 @@ script.js (JavaScript file that enables the dynamics of the page)
 
 The other two files are for the back-end (processing transactions between the page and underlying database.
 createTables.txt (creates the tables for the database)
+submit_order.php (PHP file for submitting orders to database)
+
+Files are currently far from complete and do not present the final product.
 
