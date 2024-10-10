@@ -6,3 +6,5 @@ styles.css (Formatting layout, colors, fonts)
 script.js (JavaScript file that enables the dynamics of the page)
 
 The other two files are for the back-end (processing transactions between the page and underlying database.
+createTables.txt (creates the tables for the database)
+
