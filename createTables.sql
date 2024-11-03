@@ -4,6 +4,7 @@ CREATE TABLE orders (
     name VARCHAR(255) NOT NULL,
     phone VARCHAR(50) NOT NULL,
     address VARCHAR(200) NOT NULL,
+    email VARCHAR(100) NOT NULL,
     total DECIMAL(10, 2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
