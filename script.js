@@ -65,7 +65,9 @@ document.getElementById('order-form').addEventListener('submit', function(e) {
 
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
     const address = document.getElementById('address').value;
+    const total = document.getElementById('total').innerHTML;
 
     if (!name || !phone || !address || cart.length === 0) {
         alert("Please fill in all fields and ensure the cart has items.");
@@ -75,7 +77,9 @@ document.getElementById('order-form').addEventListener('submit', function(e) {
     const orderData = {
         name,
         phone,
+        email,
         address,
+        total,
         cart
     };
 
