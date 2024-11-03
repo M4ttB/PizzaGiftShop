@@ -1,9 +1,9 @@
 <?php
 // Connect to MySQL Database
 $servername = "localhost";
-$username = "root";
-$password = "";
-$database = "scp_gift_shop";
+$username = "foundationTech";
+$password = "secureContainProtect";
+$database = "crazyPizzaGiftDB";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
