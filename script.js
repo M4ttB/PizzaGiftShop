@@ -1,8 +1,8 @@
 // Sample items in the catalog
 const items = [
-    { id: 1, name: "SCP-173 Statue", price: 10.00, description: "A creepy statue that moves when unobserved.", image: "item1.jpg" },
-    { id: 2, name: "SCP-999 Plush", price: 5.00, description: "A plush toy of SCP-999, known as 'The Tickle Monster'.", image: "item2.jpg" },
-    { id: 3, name: "SCP-682 'Hate' Shirt", price: 20.00, description: "A t-shirt featuring SCP-682, the most hostile entity in the Foundation.", image: "item3.jpg" }
+    { id: 1, name: "SCP-173 Statue", price: 10.00, description: "A creepy statue that moves when unobserved.", image: "images/item1.jpg" },
+    { id: 2, name: "SCP-999 Plush", price: 5.00, description: "A plush toy of SCP-999, known as 'The Tickle Monster'.", image: "images/item2.jpg" },
+    { id: 3, name: "SCP-682 'Hate' Shirt", price: 20.00, description: "A t-shirt featuring SCP-682, the most hostile entity in the Foundation.", image: "images/item3.jpg" }
 ];
 
 let cart = [];

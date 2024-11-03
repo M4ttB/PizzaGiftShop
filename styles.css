@@ -25,8 +25,14 @@ header {
 
 .catalog {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
+}
+
+.catalog #item-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .catalog .item {
