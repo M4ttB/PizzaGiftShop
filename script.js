@@ -1,14 +1,39 @@
 // Sample items in the catalog
-const items = [
-    { id: 1, name: "SCP-173 Statue", price: 10.00, description: "A creepy statue that moves when unobserved.", image: "images/item1.jpg" },
-    { id: 2, name: "SCP-999 Plush", price: 5.00, description: "A plush toy of SCP-999, known as 'The Tickle Monster'.", image: "images/item2.jpg" },
-    { id: 3, name: "SCP-682 'Hate' Shirt", price: 20.00, description: "A t-shirt featuring SCP-682, the most hostile entity in the Foundation.", image: "images/item3.jpg" }
-];
+// const items = [
+//     { id: 1, name: "SCP-173 Statue", price: 10.00, description: "A creepy statue that moves when unobserved.", image: "images/item1.jpg" },
+//     { id: 2, name: "SCP-999 Plush", price: 5.00, description: "A plush toy of SCP-999, known as 'The Tickle Monster'.", image: "images/item2.jpg" },
+//     { id: 3, name: "SCP-682 'Hate' Shirt", price: 20.00, description: "A t-shirt featuring SCP-682, the most hostile entity in the Foundation.", image: "images/item3.jpg" }
+// ];
+
+//let items = []; //To be populated by the database dynamically
 
 let cart = [];
 
+// Fetch items from the backend
+/*function fetchItems() {
+    fetch('fetch_items.php')
+        .then(response => response.json())
+        .then(data => {
+            items = data;  // Populate items with data from the database
+            displayCatalog();  // Display catalog once items are loaded
+        })
+        .catch(error => {
+            console.error('Error fetching items:', error);
+        });
+} */
+
+// Fetch items from the server
+function fetchCatalog() {
+    fetch('fetch_items.php') // Replace 'fetch_items.php' with your server-side script
+        .then(response => response.json())
+        .then(items => {
+            displayCatalog(items);
+        })
+        .catch(error => console.error('Error fetching items:', error));
+}
+
 // Populate the catalog with items
-function displayCatalog() {
+/*function displayCatalog() {
     const itemList = document.getElementById('item-list');
     itemList.innerHTML = "";
     items.forEach(item => {
@@ -23,7 +48,29 @@ function displayCatalog() {
         `;
         itemList.innerHTML += itemElement;
     });
+} */
+
+// Populate the catalog with items
+function displayCatalog(items) {
+    const itemList = document.getElementById('item-list');
+    itemList.innerHTML = "";
+    
+    items.forEach(item => {
+        const itemElement = `
+            <div class="item" data-id="${item.id}">
+                <img src="${item.image_path}" alt="${item.name}" loading="lazy">
+                <h3>${item.name}</h3>
+                <p>${item.description}</p>
+                <p>$${item.price.toFixed(2)}</p>
+                <button onclick="addToCart(${item.id})">Add to Cart</button>
+            </div>
+        `;
+        itemList.innerHTML += itemElement;
+    });
 }
+
+//Initialize by fetching items
+fetchItems();
 
 // Add an item to the cart
 function addToCart(itemId) {
@@ -103,5 +150,8 @@ document.getElementById('order-form').addEventListener('submit', function(e) {
     });
 });
 
+// Initialize catalog by fetching from the database
+fetchCatalog();
+
 // Initialize catalog
-displayCatalog();
+// displayCatalog();
