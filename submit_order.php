@@ -11,6 +11,21 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Query to fetch items from the database
+// $sql = "SELECT id, name, price, description, image FROM items";
+$sql = "SELECT item_id AS id, name, description, price, image_path FROM giftshop_items";
+$result = $conn->query($sql);
+
+$items = [];
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $items[] = $row;
+    }
+}
+
+// Output items as JSON
+echo json_encode($items);
+
 // Get the JSON input
 $input = file_get_contents('php://input');
 $orderData = json_decode($input, true);
