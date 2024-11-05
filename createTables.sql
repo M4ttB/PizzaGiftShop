@@ -1,4 +1,4 @@
-USE testdb;
+USE crazyPizzaGiftDB; /*Name of our database*/
 
 /*When orders are filled, information from this table are emailed as an encrypted invoice. In other words, this table represents the true order items.*/
 CREATE TABLE scp_items (
