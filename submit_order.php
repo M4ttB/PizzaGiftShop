@@ -12,7 +12,8 @@ if ($conn->connect_error) {
 }
 
 // Query to fetch items from the database
-$sql = "SELECT id, name, price, description, image FROM items";
+// $sql = "SELECT id, name, price, description, image FROM items";
+$sql = "SELECT item_id AS id, name, description, price, image_path FROM giftshop_items";
 $result = $conn->query($sql);
 
 $items = [];
