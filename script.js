@@ -24,13 +24,20 @@ let cart = [];
 
 // Fetch items from the server
 function fetchCatalog() {
-    fetch('fetch_items.php') // Replace 'fetch_items.php' with your server-side script
-        .then(response => response.json())
+    fetch('fetch_items.php') 
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json(); 
+        })
         .then(items => {
-            displayCatalog(items);
+            console.log('Fetched items:', items); 
+            displayCatalog(items); 
         })
         .catch(error => console.error('Error fetching items:', error));
 }
+
 
 // Populate the catalog with items
 /*function displayCatalog() {
@@ -61,7 +68,7 @@ function displayCatalog(items) {
                 <img src="${item.image_path}" alt="${item.name}" loading="lazy">
                 <h3>${item.name}</h3>
                 <p>${item.description}</p>
-                <p>$${item.price.toFixed(2)}</p>
+                <p>$${item.price}</p>
                 <button onclick="addToCart(${item.id})">Add to Cart</button>
             </div>
         `;
@@ -70,7 +77,7 @@ function displayCatalog(items) {
 }
 
 //Initialize by fetching items
-fetchItems();
+fetchCatalog();
 
 // Add an item to the cart
 function addToCart(itemId) {
