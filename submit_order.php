@@ -42,16 +42,23 @@ $address = $orderData['address'];
 $email = $orderData['email'];
 $total = $orderData['total'];
 
-// Insert into orders table
-$stmt = $conn->prepare("INSERT INTO orders (name, phone, address, email, total) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssd", $customer_name, $phone, $address, $email, $total);
-if (!$stmt->execute()) {
-    echo json_encode(["error" => "Error inserting order: " . $stmt->error]); 
+// $stmt = $conn->prepare(`INSERT INTO orders (name, phone, address, email, total) VALUES (${customer_name}, ${phone}, ${address}, ${email}, ${total})`);
+// $stmt->bind_param("ssssd", $customer_name, $phone, $address, $email, $total);
+// if (!$stmt->execute()) {
+//     echo json_encode(["error" => "Error inserting order: " . $stmt->error]); 
+//     exit;
+// }
+
+$sql = "INSERT INTO orders (name, phone, address, email, total) VALUES ('$customer_name', '$phone', '$address', '$email', $total)";
+
+// Execute the query
+if (!$conn->query($sql)) {
+    echo json_encode(["error" => "Error inserting order: " . $conn->error]); 
     exit;
 }
 
 $order_id = $stmt->insert_id; // Get the newly created order ID
-$stmt->close();
+// $stmt->close();
 
 // Insert each item into order_items table
 foreach ($orderData['cart'] as $item) {

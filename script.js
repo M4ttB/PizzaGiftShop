@@ -76,9 +76,6 @@ function displayCatalog() {
     });
 }
 
-//Initialize by fetching items
-fetchCatalog();
-
 // Add an item to the cart
 function addToCart(itemId) {
     const item = items.find(i => i.id == itemId);
