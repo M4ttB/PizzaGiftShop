@@ -5,7 +5,7 @@
 //     { id: 3, name: "SCP-682 'Hate' Shirt", price: 20.00, description: "A t-shirt featuring SCP-682, the most hostile entity in the Foundation.", image: "images/item3.jpg" }
 // ];
 
-//let items = []; //To be populated by the database dynamically
+let items; //To be populated by the database dynamically
 
 let cart = [];
 
@@ -31,9 +31,9 @@ function fetchCatalog() {
             }
             return response.json(); 
         })
-        .then(items => {
-            console.log('Fetched items:', items); 
-            displayCatalog(items); 
+        .then(catalog => {
+            items = catalog
+            displayCatalog(); 
         })
         .catch(error => console.error('Error fetching items:', error));
 }
@@ -58,7 +58,7 @@ function fetchCatalog() {
 } */
 
 // Populate the catalog with items
-function displayCatalog(items) {
+function displayCatalog() {
     const itemList = document.getElementById('item-list');
     itemList.innerHTML = "";
     
@@ -81,8 +81,10 @@ fetchCatalog();
 
 // Add an item to the cart
 function addToCart(itemId) {
-    const item = items.find(i => i.id === itemId);
-    const existingItem = cart.find(i => i.id === itemId);
+    const item = items.find(i => i.id == itemId);
+    const existingItem = cart.find(i => i.id == itemId);
+
+    console.log(itemId, items)
 
     if (existingItem) {
         existingItem.quantity += 1;
@@ -145,8 +147,7 @@ document.getElementById('order-form').addEventListener('submit', function(e) {
         },
         body: JSON.stringify(orderData)
     })
-    .then(response => response.json())
-    .then(data => {
+    .then(() => {
         alert("Order placed successfully!");
         cart = [];
         updateCart();
