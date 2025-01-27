@@ -1,4 +1,6 @@
-This is just a general overview of the contents of this project folder. These files will be hosted on the web server to serve the webpage.
+# LAMP stack built with Docker Compose
+
+!This is just a general overview of the contents of this project folder. These files will be hosted on the web server to serve the webpage.
 This is LEMP Stack (Linux, Nginx, MySQL, PHP)
 
 There are three components that make up the front-end (what the user sees on the webpage).

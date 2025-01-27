@@ -1,0 +1,64 @@
+version: "3"
+
+services:
+  database:
+    image: mariadb:10.6
+    restart: "always"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
+      - ./data/mysql:/var/lib/mysql
+      - ./logs/mysql:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secureContainProtect
+      MYSQL_DATABASE: crazyPizzaGiftDB
+      MYSQL_USER: foundationTech
+      MYSQL_PASSWORD: secureContainProtect
+  webserver:
+    build:
+      context: ./php
+    container_name: "webserver"
+    restart: "always"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "9000:9000"
+    links:
+      - database
+    volumes:
+      - ./www:/var/www/html:rw
+      - ./receipts:/var/www/receipts:rw # going back a dir here to avoid putting stuff in my alr existing docker volume lol
+      - ./php.ini:/usr/local/etc/php/php.ini
+      - ./vhosts.conf:/etc/apache2/sites-enabled/default.conf
+      - ./logs/apache2:/var/log/apache2
+    environment:
+      APACHE_DOCUMENT_ROOT: /var/www/html
+      PMA_PORT: 8080
+      MYSQL_ROOT_PASSWORD: secureContainProtect
+      MYSQL_USER: foundationTech
+      MYSQL_PASSWORD: secureContainProtect
+      MYSQL_DATABASE: crazyPizzaGiftDB
+      HOST_MACHINE_MYSQL_PORT: 3306
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: "phpmyadmin"
+    links:
+      - database
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: secureContainProtect
+      MYSQL_ROOT_PASSWORD: secureContainProtect
+      MYSQL_USER: foundationTech
+      MYSQL_PASSWORD: secureContainProtect
+    ports:
+      - "8080:80"
+      - "8443:443"
+      - "3307:3307"
+    volumes:
+      - /sessions
+      - ./php.ini:/usr/local/etc/php/conf.d/php.ini
