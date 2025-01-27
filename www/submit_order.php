@@ -55,6 +55,7 @@ $order_id = $stmt->insert_id;
 $sql = "SELECT * from orders";
 
 $file = fopen("/var/www/receipts/order".$order_id.".txt", "w");
+fwrite($file, "Name: ".$name.", Email: ".$email."\n");
 // Insert each item into order_items table
 foreach ($orderData['cart'] as $item) {
     $item_id = $item['id'];
